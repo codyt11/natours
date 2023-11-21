@@ -28,8 +28,7 @@ exports.getUser = (req, res) => {
 };
 
 exports.newUser = (req, res) => {
-  const newId = users[users.length - 1].id + 1;
-  const newUser = { id: newId, ...req.body };
+  const newUser = { ...req.body };
 
   users.push(newUser);
   fs.writeFile(
