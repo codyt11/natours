@@ -20,5 +20,19 @@
     "class-methods-use-this": "off",
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "settings": {
+    "node": {
+      "version": "16.17.0",
+      "tryExtensions": [".js", ".json", ".node"]
+    }
+  },
+  "env": {
+    "es2021": true,
+    "node": true
   }
 }

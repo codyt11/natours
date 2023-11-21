@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/users.json`)
+  fs.readFileSync(`${__dirname}/../dev-data/data/users.json`),
 );
 
 exports.getAllUsers = (req, res) => {
@@ -29,19 +29,20 @@ exports.getUser = (req, res) => {
 
 exports.newUser = (req, res) => {
   const newId = users[users.length - 1].id + 1;
-  const newUser = Object.assign({ id: newId }, req.body);
+  const newUser = { id: newId, ...req.body };
+
   users.push(newUser);
   fs.writeFile(
     `${__dirname}/dev-data/data/users.json`,
     JSON.stringify(users),
-    (err) => {
+    () => {
       res.status(201).json({
         status: 'success',
         data: {
           user: newUser,
         },
       });
-    }
+    },
   );
 };
 
@@ -70,7 +71,7 @@ exports.deleteUser = (req, res) => {
   res.status(204).json({
     status: 'success',
     data: {
-      tour: `<deleted user...${id}>`,
+      tour: `<deleted user...${req.params.id}>`,
     },
   });
 };
