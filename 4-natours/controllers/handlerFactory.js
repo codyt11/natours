@@ -30,12 +30,9 @@ exports.getOne = (Model, popOptions) =>
     let query = Model.findById(req.params.id);
 
     // Check if the Model is Tour and modify the query to include populate
-    if (popOptions) {
-      query = query.populate(popOptions);
-    }
+    if (popOptions) query = query.populate(popOptions);
 
     const doc = await query; // Now executing the query with populate if applicable
-
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
